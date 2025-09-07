@@ -4,7 +4,10 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-from pregunta_01 import cargar_data
+def cargar_data():
+    with open("files/input/data.csv", "r",encoding="utf-8") as f: #utf-8 para que identifique tildes y otros caracteres
+        data = [line.strip().split("\t") for line in f.readlines()] #.strip para eliminar \n y .split para separar las comlumnas \t
+    return data
 from operator import itemgetter
 from collections import Counter
 
@@ -12,7 +15,6 @@ def pregunta_02():
     data = cargar_data()
     primera_columna = [row[0] for row in data]  # saco la primera columna
     conteo = Counter(primera_columna)
-    print(conteo)
     return sorted(conteo.items(), key=itemgetter(0), reverse=False) #conteo solo si solo son las letras, .tem cuando sol por parejas
     
 print(pregunta_02())
